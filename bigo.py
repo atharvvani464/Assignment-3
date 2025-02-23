@@ -13,11 +13,10 @@ code to someone else), the case shall be submitted to the Office of the Dean of
 Students. Academic penalties up to and including an F in the course are likely.
 
 UT EID 1: Atharv Vani
-UT EID 2:
+UT EID 2: 
 """
 
 
-# TODO: implement this function. You may delete this comment when you are done.
 def length_of_longest_substring_n3(s):
     """
     Finds the length of the longest substring without repeating characters
@@ -27,10 +26,14 @@ def length_of_longest_substring_n3(s):
     post: Returns an integer >= 0 representing the length of the longest substring
           in s that contains no repeating characters.
     """
-    pass
+    max_length = 0
+    for i in range(len(s)):
+        for j in range(i, len(s)):
+            substring = s[i:j+1]
+            if len(substring) == len(set(substring)):
+                max_length = max(max_length, j - i + 1)
+    return max_length
 
-
-# TODO: implement this function. You may delete this comment when you are done.
 def length_of_longest_substring_n2(s):
     """
     Finds the length of the longest substring without repeating characters
@@ -42,10 +45,17 @@ def length_of_longest_substring_n2(s):
     post: Returns an integer >= 0 representing the length of the longest substring
           in s that contains no repeating characters.
     """
-    pass
+    n = len(s)
+    max_length = 0
+    for i in range(n):
+        freq = [0] * 128  # Assuming standard ASCII characters
+        for j in range(i, n):
+            if freq[ord(s[j])]:  # Character already seen in the substring
+                break
+            freq[ord(s[j])] = 1
+            max_length = max(max_length, j - i + 1)
+    return max_length
 
-
-# TODO: implement this function. You may delete this comment when you are done.
 def length_of_longest_substring_n(s):
     """
     Finds the length of the longest substring without repeating characters
@@ -59,4 +69,14 @@ def length_of_longest_substring_n(s):
     post: Returns an integer >= 0 representing the length of the longest substring
           in s that contains no repeating characters.
     """
-    pass
+    max_length = 0
+    freq = [0] * 128
+    left = 0
+    for right in range(len(s)):
+        char_index = ord(s[right])
+        freq[char_index] += 1
+        while freq[char_index] > 1:
+            freq[ord(s[left])] -= 1
+            left += 1
+        max_length = max(max_length, right - left + 1)
+    return max_length
