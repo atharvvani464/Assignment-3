@@ -26,13 +26,13 @@ def length_of_longest_substring_n3(s):
     post: Returns an integer >= 0 representing the length of the longest substring
           in s that contains no repeating characters.
     """
-    max_length = 0
+    longest_substring = 0
     for i in range(len(s)):
         for j in range(i, len(s)):
             substring = s[i:j+1]
             if len(substring) == len(set(substring)):
-                max_length = max(max_length, j - i + 1)
-    return max_length
+                longest_substring = max(longest_substring, j - i + 1)
+    return longest_substring
 
 def length_of_longest_substring_n2(s):
     """
@@ -48,9 +48,9 @@ def length_of_longest_substring_n2(s):
     n = len(s)
     max_length = 0
     for i in range(n):
-        freq = [0] * 128  # Assuming standard ASCII characters
+        freq = [0] * 128
         for j in range(i, n):
-            if freq[ord(s[j])]:  # Character already seen in the substring
+            if freq[ord(s[j])]: 
                 break
             freq[ord(s[j])] = 1
             max_length = max(max_length, j - i + 1)
@@ -70,13 +70,13 @@ def length_of_longest_substring_n(s):
           in s that contains no repeating characters.
     """
     max_length = 0
-    freq = [0] * 128
+    occurences = [0] * 128
     left = 0
     for right in range(len(s)):
         char_index = ord(s[right])
-        freq[char_index] += 1
-        while freq[char_index] > 1:
-            freq[ord(s[left])] -= 1
+        occurences[char_index] += 1
+        while occurences[char_index] > 1:
+            occurences[ord(s[left])] -= 1
             left += 1
         max_length = max(max_length, right - left + 1)
     return max_length
