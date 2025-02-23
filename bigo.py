@@ -70,13 +70,13 @@ def length_of_longest_substring_n(s):
           in s that contains no repeating characters.
     """
     max_length = 0
-    occurences = [0] * 128
+    freq = [0] * 128
     left = 0
     for right in range(len(s)):
         char_index = ord(s[right])
-        occurences[char_index] += 1
-        while occurences[char_index] > 1:
-            occurences[ord(s[left])] -= 1
+        freq[char_index] += 1
+        while freq[char_index] > 1:
+            freq[ord(s[left])] -= 1
             left += 1
         max_length = max(max_length, right - left + 1)
     return max_length
