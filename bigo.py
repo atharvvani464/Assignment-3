@@ -50,7 +50,7 @@ def length_of_longest_substring_n2(s):
     for i in range(n):
         freq = [0] * 128
         for j in range(i, n):
-            if freq[ord(s[j])]: 
+            if freq[ord(s[j])]:
                 break
             freq[ord(s[j])] = 1
             max_length = max(max_length, j - i + 1)
@@ -72,7 +72,8 @@ def length_of_longest_substring_n(s):
     max_length = 0
     freq = [0] * 128
     left = 0
-    for right in range(len(s)):
+    ran = len(s)
+    for right in range(ran):
         char_index = ord(s[right])
         freq[char_index] += 1
         while freq[char_index] > 1:
